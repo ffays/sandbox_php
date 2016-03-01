@@ -13,7 +13,7 @@
 function do_redirect() {
 	session_start();
 	if(isset($_POST['clipboard'])) {
-		$_SESSION['clipboard'] = $_POST['clipboard'];
+		$_SESSION['clipboard'] = get_magic_quotes_gpc()?stripslashes($_POST['clipboard']):$_POST['clipboard'];
 	}
 	$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 	header("Location: //{$_SERVER['HTTP_HOST']}{$url}?" . session_name() . "=" . session_id());
