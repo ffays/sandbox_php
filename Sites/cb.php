@@ -7,8 +7,8 @@
  */
  
 function get_clipboard_dot_php_url() {
-	$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-	return "https://{$_SERVER['HTTP_HOST']}{$url}"
+	$url = str_replace(basename(__FILE__), "clipboard.php", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+	return "https://{$_SERVER['HTTP_HOST']}{$url}";
 }
 
 function session_id_generator() {
@@ -21,7 +21,7 @@ function session_id_generator() {
 </head>
 <body>
 <form action="<?php echo get_clipboard_dot_php_url(); ?>">
-PHPSESSID: <input type="text" name="PHPSESSID" value="<?php echo session_id_generator(); ?>">
+PHPSESSID: <input type="text" name="PHPSESSID" value="<?php echo session_id_generator(); ?>"><br>
 <input type="submit">
 </form>
 </body>
