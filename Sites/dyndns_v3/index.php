@@ -7,7 +7,7 @@ if(!isset($_SERVER['HTTP_AUTHORIZATION'])) {
 }
 $options = array('http' => array('method'  => 'GET', 'header' => 'Authorization: ' . $_SERVER['HTTP_AUTHORIZATION']));
 $context  = stream_context_create($options);
-$url = 'https://www.ovh.com/nic/update?system=dyndns&hostname=' . $_GET['hostname'] . "&myip=" . $_SERVER['HTTP_X_REAL_IP'];
+$url = 'https://www.ovh.com/nic/update?system=dyndns&hostname=' . $_GET['hostname'] . "&myip=" . $_SERVER['REMOTE_ADDR'];
 $response = file_get_contents($url, false, $context);
 echo $response;
 ?>
